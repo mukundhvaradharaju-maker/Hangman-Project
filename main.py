@@ -8,13 +8,16 @@ play_again = "yes"
 
 
 print("let's play hangman!")
-
+print("If you need a hint, just type help.")
 
 while play_again == "yes":
     word = random.choice(words)
     guessed_word = ["_"] * len(word)
     lives = 6
     guessed_letters = []
+    letters = list(word)
+    hints = 3
+    hints_list = []
 
 
     while lives > 0 and "_" in guessed_word:
@@ -29,8 +32,19 @@ while play_again == "yes":
             print("your coding environment does not support input().")
             break
 
+        if guess == "help" and hints > 0:
+            hint = random.choice(letters)
+            while hint in hints_list:
+                hint = random.choice(letters)
+            hints_list.append(hint)
+            print("hint: " + hint)
+            hints = hints - 1
 
-        if len(guess) != 1 or not guess.isalpha():
+        elif guess == "help" and hints <= 0:
+            print("You ran out of hints!")
+
+
+        elif len(guess) != 1 or not guess.isalpha():
             print("not a valid guess. please enter a single letter.")
             continue
 
