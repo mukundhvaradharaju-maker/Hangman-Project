@@ -51,6 +51,7 @@ while play_again == "yes":
 
         if guess in guessed_letters:
             print("you already guessed that letter!")
+            lives = lives - 1
             continue
 
 
@@ -63,7 +64,8 @@ while play_again == "yes":
                     guessed_word[i] = guess
         else:
             lives = lives - 1
-            print("letter not found!")
+            if guess != "help":
+                print("letter not found!")
 
 
     if lives == 0:
