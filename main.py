@@ -51,6 +51,7 @@ while play_again == "yes":
             while hint in hints_list:
                 hint = random.choice(letters)
             hints_list.append(hint)
+            print("Letters already used: ", *guessed_letters, sep = " ")
             print("hint: " + hint)
             hints = hints - 1
 
@@ -64,12 +65,13 @@ while play_again == "yes":
 
 
         if guess in guessed_letters:
-            print("you already guessed that letter!")
-            lives = lives - 1
-            continue
+            if guess!= "help":
+                print("you already guessed that letter!")
+                lives = lives - 1
+                continue
 
-
-        guessed_letters.append(guess)
+        if len(guess) == 1:
+            guessed_letters.append(guess)
 
 
         if guess in word:
