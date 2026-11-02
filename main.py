@@ -9,6 +9,7 @@ play_again = "yes"
 
 print("let's play hangman!")
 print("If you need a hint, just type help.")
+print("To guess the entire word, type guess answer.")
 
 while play_again == "yes":
     word = random.choice(words)
@@ -30,6 +31,19 @@ while play_again == "yes":
             guess = input("guess a letter: ").lower()
         except OSError:
             print("your coding environment does not support input().")
+            break
+
+        if guess == "guess answer":
+            try:
+                answer = input("guess the entire word: ").lower()
+            except OSError:
+                print("your coding environment does not support input().")
+                break
+
+            if answer == word:
+                guessed_word = list(word)
+            else:
+                lives = 0
             break
 
         if guess == "help" and hints > 0:
