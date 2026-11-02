@@ -45,7 +45,8 @@ while play_again == "yes":
             else:
                 lives = 0
             break
-
+        
+        #hints
         if guess == "help" and hints > 0:
             hint = random.choice(letters)
             while hint in hints_list:
@@ -58,22 +59,22 @@ while play_again == "yes":
         elif guess == "help" and hints <= 0:
             print("You ran out of hints!")
 
-
+        #validity of guess
         elif len(guess) != 1 or not guess.isalpha():
             print("not a valid guess. please enter a single letter.")
             continue
 
-
+        #no doubles
         if guess in guessed_letters:
             if guess!= "help":
                 print("you already guessed that letter!")
                 lives = lives - 1
                 continue
-
+        #remove help from list
         if len(guess) == 1:
             guessed_letters.append(guess)
 
-
+        #letter in word
         if guess in word:
             for i in range(len(word)):
                 if word[i] == guess:
@@ -83,7 +84,7 @@ while play_again == "yes":
             if guess != "help":
                 print("letter not found!")
 
-
+    #Winning or losing conditions
     if lives == 0:
         print("out of lives, game over!")
         print("the word was:", word)
@@ -91,16 +92,16 @@ while play_again == "yes":
         print("word guessed, you've won!")
         print("the word was:", word)
 
-
+    #replay
     if lives > 0 or "_" in guessed_word:
         try:
             play_again = input("play again? (yes/no) ").lower()
         except OSError:
             break
 
-
+        
         while play_again != "yes" and play_again != "no":
             play_again = input("invalid input. play again? (yes/no) ").lower()
 
-
+#ending
 print("thanks for playing!")
